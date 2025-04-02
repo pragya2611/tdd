@@ -5,6 +5,9 @@ export class StringCalculator implements ICalculator {
         if (numbers === '') {
           return 0; 
         }
+        if (numbers.length === 1 && !numbers.includes(',')) { 
+            return parseFloat(numbers); 
+        }
         return 0;
     }
 }
