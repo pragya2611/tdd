@@ -30,4 +30,8 @@ describe('StringCalculator', () => {
     test('should return the sum of two numbers separated by a comma', () => {
         expect(calculator.add('1,5')).toBe(6);
     });
+
+    test('should return the sum of multiple numbers(3 numbers) separated by commas', () => {
+        expect(calculator.add('1,2,3')).toBe(6);
+    });
 });
