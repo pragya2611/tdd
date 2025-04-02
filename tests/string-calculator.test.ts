@@ -15,4 +15,8 @@ describe('StringCalculator', () => {
       expect(isICalculator.add).toBeInstanceOf(Function);
     });
 
+    test('should return 0 for an empty string', () => {
+        expect(calculator.add('')).toBe(0);
+    });
+
 });
