@@ -11,8 +11,9 @@ export class StringCalculator implements ICalculator {
             return parseFloat(numbers); 
         }
         if (numbers.includes(',')) {
-            const numArray = numbers.split(',').map(num => parseFloat(num.trim()));
-            return numArray.reduce((acc, curr) => acc + curr, 0);
+            // Split the string by comma and convert to numbers
+            // Then sum them up
+            return numbers.split(',').map(num => parseFloat(num.trim())).reduce((sum, num) => sum + num, 0);
         }
         return 0;
     }
