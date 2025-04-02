@@ -19,4 +19,8 @@ describe('StringCalculator', () => {
         expect(calculator.add('')).toBe(0);
     });
 
+    test('should return the number for a single number', () => {
+        expect(calculator.add('1')).toBe(1);
+    });
+
 });
