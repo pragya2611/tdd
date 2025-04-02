@@ -1,7 +1,9 @@
 import { ICalculator } from "./calculator.interface";
 
 export class StringCalculator implements ICalculator {
+
     public add(numbers: string): number {
+        numbers = numbers.trim();
         if (numbers === '') {
           return 0; 
         }

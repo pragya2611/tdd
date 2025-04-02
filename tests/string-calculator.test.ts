@@ -23,4 +23,8 @@ describe('StringCalculator', () => {
         expect(calculator.add('1')).toBe(1);
     });
 
+    test('should return the number for a single number having some trailing space', () => {
+        expect(calculator.add('1 ')).toBe(1);
+    });
+
 });
