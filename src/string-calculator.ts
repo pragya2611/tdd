@@ -10,6 +10,10 @@ export class StringCalculator implements ICalculator {
         if (numbers.length === 1 && !numbers.includes(',')) { 
             return parseFloat(numbers); 
         }
+        if (numbers.includes(',')) {
+            const numArray = numbers.split(',').map(num => parseFloat(num.trim()));
+            return numArray.reduce((acc, curr) => acc + curr, 0);
+        }
         return 0;
     }
 }
