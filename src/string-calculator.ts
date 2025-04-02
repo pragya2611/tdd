@@ -11,13 +11,15 @@ export class StringCalculator implements ICalculator {
             return parseFloat(numbers); 
         }
 
-        const delimiters = [',', '\n'];
+        let delimiter = /[\n,]/;
+        const customDelimiterMatch = numbers.match(/\/\/(.*?)\n/);
 
-        // Create a regex pattern dynamically using the delimiters array
-        const delimiterPattern = new RegExp(`[${delimiters.join('')}]`);
+        if (customDelimiterMatch) {
+            delimiter = new RegExp(customDelimiterMatch[1]); 
+            numbers = numbers.substring(customDelimiterMatch[0].length); 
+        }
 
-        // Split based on the dynamic delimiter pattern
-        const numArray = numbers.split(delimiterPattern).map(num => parseFloat(num.trim()));
+        const numArray = numbers.split(delimiter).map(num => parseFloat(num.trim()));
 
        
         return numArray.reduce((sum, num) => sum + num, 0);       
