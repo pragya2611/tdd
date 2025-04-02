@@ -46,4 +46,9 @@ describe('StringCalculator', () => {
     test('should return the sum of multiple numbers(3 numbers) separated by newline and comma', () => {
         expect(calculator.add('1\n2,3')).toBe(6);
     });
+
+    test('should use custom delimiter if specified, otherwise default to comma in the numbers argument', () => {
+        expect(calculator.add("//;\n1;2")).toBe(3); 
+        expect(calculator.add("1,2,3")).toBe(6); 
+    });
 });
