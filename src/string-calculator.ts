@@ -17,11 +17,10 @@ export class StringCalculator implements ICalculator {
         const numArray = numbers.split(delimiter).map(num => parseFloat(num.trim()));
 
         const negativeNumbers = numArray.filter(num => num < 0);
-        if (negativeNumbers.length) {
-            throw new Error(`negative numbers not allowed ${negativeNumbers.join(",")}`);
+        if (negativeNumbers.length > 0) {
+            throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
         }
 
-       
         return numArray.reduce((sum, num) => sum + num, 0);       
     }
 }
