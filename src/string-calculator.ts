@@ -21,6 +21,13 @@ export class StringCalculator implements ICalculator {
             throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
         }
 
-        return numArray.reduce((sum, num) => sum + num, 0);       
+        const numberGreaterThanThousand = numArray.filter(num => num > 1000);
+        if (numberGreaterThanThousand.length > 0) { 
+            console.warn(`Ignoring numbers greater than 1000: ${numberGreaterThanThousand.join(',')}`); 
+        }
+        const validNumbers = numArray.filter(num => num <= 1000);
+        if (validNumbers.length === 0) return 0;
+        if (validNumbers.length === 1) return validNumbers[0];
+        return validNumbers.reduce((sum, num) => sum + num, 0);       
     }
 }
