@@ -6,13 +6,7 @@ export class StringCalculator implements ICalculator {
         numbers = numbers.trim();
         if (!numbers) return 0; 
 
-        let delimiter = /[\n,]/;
-        const customDelimiterMatch = numbers.match(/\/\/(.*?)\n/);
-
-        if (customDelimiterMatch) {
-            delimiter = new RegExp(customDelimiterMatch[1]); 
-            numbers = numbers.substring(customDelimiterMatch[0].length); 
-        }
+        const delimiter = this.getDelimiter(numbers);
 
         const numArray = numbers.split(delimiter).map(num => parseFloat(num.trim()));
 
@@ -29,5 +23,10 @@ export class StringCalculator implements ICalculator {
         if (validNumbers.length === 0) return 0;
         if (validNumbers.length === 1) return validNumbers[0];
         return validNumbers.reduce((sum, num) => sum + num, 0);       
+    }
+
+    private getDelimiter(numbers: string): RegExp {
+        const customDelimiterMatch = numbers.match(/^\/\/(.*?)\n/);
+        return customDelimiterMatch ? new RegExp(customDelimiterMatch[1]) : /[\n,]/;
     }
 }
