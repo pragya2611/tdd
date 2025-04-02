@@ -4,12 +4,7 @@ export class StringCalculator implements ICalculator {
 
     public add(numbers: string): number {
         numbers = numbers.trim();
-        if (numbers === '') {
-          return 0; 
-        }
-        if (numbers.length === 1 && !numbers.includes(',')) { 
-            return parseFloat(numbers); 
-        }
+        if (!numbers) return 0; 
 
         let delimiter = /[\n,]/;
         const customDelimiterMatch = numbers.match(/\/\/(.*?)\n/);
