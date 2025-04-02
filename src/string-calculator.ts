@@ -11,10 +11,7 @@ export class StringCalculator implements ICalculator {
 
         const numArray = this.parseNumbers(numbers, delimiter);
 
-        const negativeNumbers = numArray.filter(num => num < 0);
-        if (negativeNumbers.length > 0) {
-            throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
-        }
+        this.validateNegatives(numArray);
 
         const numberGreaterThanThousand = numArray.filter(num => num > 1000);
         if (numberGreaterThanThousand.length > 0) { 
@@ -37,5 +34,12 @@ export class StringCalculator implements ICalculator {
 
     private parseNumbers(numbers: string, delimiter: RegExp): number[] {
         return numbers.split(delimiter).map(num => parseFloat(num.trim()));
+    }
+
+    private validateNegatives(numArray: number[]): void {
+        const negativeNumbers = numArray.filter(num => num < 0);
+        if (negativeNumbers.length > 0) {
+            throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
+        }
     }
 }
