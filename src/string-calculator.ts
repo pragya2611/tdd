@@ -7,6 +7,7 @@ export class StringCalculator implements ICalculator {
         if (!numbers) return 0; 
 
         const delimiter = this.getDelimiter(numbers);
+        numbers = this.removeDelimiterPrefix(numbers);
 
         const numArray = numbers.split(delimiter).map(num => parseFloat(num.trim()));
 
@@ -28,5 +29,9 @@ export class StringCalculator implements ICalculator {
     private getDelimiter(numbers: string): RegExp {
         const customDelimiterMatch = numbers.match(/^\/\/(.*?)\n/);
         return customDelimiterMatch ? new RegExp(customDelimiterMatch[1]) : /[\n,]/;
+    }
+
+    private removeDelimiterPrefix(numbers: string): string {
+        return numbers.startsWith("//") ? numbers.substring(numbers.indexOf("\n") + 1) : numbers;
     }
 }
