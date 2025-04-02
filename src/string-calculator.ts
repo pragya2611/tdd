@@ -13,14 +13,8 @@ export class StringCalculator implements ICalculator {
 
         this.validateNegatives(numArray);
 
-        const numberGreaterThanThousand = numArray.filter(num => num > 1000);
-        if (numberGreaterThanThousand.length > 0) { 
-            console.warn(`Ignoring numbers greater than 1000: ${numberGreaterThanThousand.join(',')}`); 
-        }
-        const validNumbers = numArray.filter(num => num <= 1000);
-        if (validNumbers.length === 0) return 0;
-        if (validNumbers.length === 1) return validNumbers[0];
-        return validNumbers.reduce((sum, num) => sum + num, 0);       
+        
+        return this.addAllValidNumbers(numArray);       
     }
 
     private getDelimiter(numbers: string): RegExp {
@@ -41,5 +35,14 @@ export class StringCalculator implements ICalculator {
         if (negativeNumbers.length > 0) {
             throw new Error(`negative numbers not allowed ${negativeNumbers.join(',')}`);
         }
+    }
+
+    private addAllValidNumbers(numArray: number[]): number {
+        const validNumbers = numArray.filter(num => num <= 1000);
+        validNumbers
+            .filter(num => num > 1000)
+            .forEach(num => console.warn(`Ignoring number greater than 1000: ${num}`));
+
+        return validNumbers.reduce((sum, num) => sum + num, 0);
     }
 }
